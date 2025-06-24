@@ -43,14 +43,14 @@ fun NaiveBayesScreen(navController: NavHostController) {
 
 
 
-            Text("Métricas del modelo:", style = MaterialTheme.typography.titleMedium)
+            Text("Métricas del modelo:", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(15.dp))
             metricas.forEach { (clave, valor) ->
-                Text("$clave: ${"%.2f".format(valor)}")
+                Text("$clave: ${"%.2f".format(valor)}", modifier = Modifier.padding(top=10.dp,start = 20.dp, end = 20.dp))
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Canvas(modifier = Modifier.fillMaxWidth().height(300.dp)) {
+            Canvas(modifier = Modifier.fillMaxWidth().height(300.dp).padding(18.dp)) {
                 datos.forEach {
                     val color = if (it.calidad == "buena") Color.Green else Color.Red
                     val x = ((it.ph - 5.5) / 3.0 * size.width).toFloat()
@@ -63,32 +63,32 @@ fun NaiveBayesScreen(navController: NavHostController) {
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Text("Predicción de Calidad del Agua", style = MaterialTheme.typography.titleLarge)
+            Text("Predicción de Calidad del Agua", style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(15.dp))
 
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 value = ph.toString(),
                 onValueChange = { ph = it.toDoubleOrNull() ?: 7.0 },
-                label = { Text("pH") })
+                label = { Text("pH") },modifier = Modifier.padding(15.dp))
             OutlinedTextField(
                 value = temperatura.toString(),
                 onValueChange = { temperatura = it.toDoubleOrNull() ?: 22.0 },
-                label = { Text("Temperatura (°C)") })
+                label = { Text("Temperatura (°C)") },modifier = Modifier.padding(15.dp))
             OutlinedTextField(
                 value = turbidez.toString(),
                 onValueChange = { turbidez = it.toIntOrNull() ?: 2 },
-                label = { Text("Turbidez") })
+                label = { Text("Turbidez") },modifier = Modifier.padding(15.dp))
 
             Button(onClick = {
                 resultado = NaiveBayesMock.predecir(ph, temperatura, turbidez)
-            }, modifier = Modifier.padding(vertical = 8.dp)) {
+            }, modifier = Modifier.padding(15.dp)) {
                 Text("Predecir")
             }
 
             Text(
                 "Resultado: ${resultado.uppercase()}",
-                color = if (resultado == "buena") Color.Green else Color.Red
+                color = if (resultado == "buena") Color.Green else Color.Red,modifier = Modifier.padding(15.dp)
             )
         }
     }

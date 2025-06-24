@@ -10,7 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.soft_inteligente_app.data.RutaCompartida
 
@@ -42,7 +44,7 @@ fun InputScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Ingrese las distancias entre puntos")
+            Text("Ingrese las distancias entre puntos", modifier = Modifier.padding(15.dp), fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
 
             for (i in 0 until numPuntos) {
                 for (j in i + 1 until numPuntos) {
@@ -51,7 +53,7 @@ fun InputScreen(navController: NavHostController) {
                         value = inputs[key] ?: "",
                         onValueChange = { inputs[key] = it },
                         label = { Text("Punto ${i + 1} a Punto ${j + 1}") },
-                        modifier = Modifier.fillMaxWidth().padding(4.dp)
+                        modifier = Modifier.fillMaxWidth().padding(15.dp)
                     )
                 }
             }

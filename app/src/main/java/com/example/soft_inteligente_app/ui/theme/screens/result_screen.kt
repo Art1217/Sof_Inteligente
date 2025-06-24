@@ -40,7 +40,7 @@ fun ResultScreen(navController: NavHostController) {
     val (mejorRuta, distanciaTotal) = remember { GeneticAlgorithm.resolver(distancias) }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color =Color.White),
         bottomBar = {
             BottomNavPanel(navController)
         }
@@ -61,7 +61,7 @@ fun ResultScreen(navController: NavHostController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(20.dp),
                 horizontalArrangement = Arrangement.Start
             ) {
                 Button(onClick = { navController.popBackStack() }) {
@@ -79,7 +79,7 @@ fun ResultScreen(navController: NavHostController) {
                     .clip(RoundedCornerShape(16.dp))
                     .border(2.dp, Color.Gray, RoundedCornerShape(16.dp))
                     .background(Color.White)
-                    .padding(8.dp)
+                    .padding(15.dp)
             ) {
                 Canvas(
                     modifier = Modifier
@@ -118,7 +118,7 @@ fun ResultScreen(navController: NavHostController) {
                     }
                 }
             }
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(5.dp))
             Text("Ruta: ${mejorRuta.joinToString(" -> ") { (it + 1).toString() }}")
             Spacer(modifier = Modifier.padding(10.dp))
             Text("Distancia total: ${"%.2f".format(distanciaTotal)} km", modifier = Modifier.padding(bottom = 40.dp))

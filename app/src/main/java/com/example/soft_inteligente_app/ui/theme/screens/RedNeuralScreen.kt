@@ -1,5 +1,6 @@
 package com.example.soft_inteligente_app.ui.theme.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -36,7 +37,7 @@ fun RedNeuralScreen(navController: NavHostController) {
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color=Color.White),
         bottomBar = {
             BottomNavPanel(navController)
         }
@@ -52,8 +53,8 @@ fun RedNeuralScreen(navController: NavHostController) {
         Column(modifier = Modifier.padding(paddingValues).verticalScroll(scrollState)) {
             Text(
                 "Clasificación de Mascota Ideal (Red Neuronal)",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(top = 50.dp)
+                style = MaterialTheme.typography.titleLarge, color = Color.Black,
+                modifier = Modifier.padding(top = 50.dp, start = 15.dp, end = 15.dp)
             )
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -62,14 +63,14 @@ fun RedNeuralScreen(navController: NavHostController) {
                 value = tiempo.toString(),
                 onValueChange = { tiempo = it.toDoubleOrNull() ?: 0.0 },
                 label = { Text("Tiempo libre diario (horas)") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(15.dp)
             )
 
             OutlinedTextField(
                 value = espacio.toString(),
                 onValueChange = { espacio = it.toDoubleOrNull() ?: 0.0 },
                 label = { Text("Espacio disponible (m²)") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(15.dp)
             )
 
             Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
@@ -80,7 +81,7 @@ fun RedNeuralScreen(navController: NavHostController) {
             Button(onClick = {
                 resultado =
                     RedNeuronalMock.predecir(tiempo, espacio, if (alergia) 1 else 0).uppercase()
-            }, modifier = Modifier.padding(top = 16.dp)) {
+            }, modifier = Modifier.padding(top = 16.dp, start = 15.dp, end = 15.dp)) {
                 Text("Predecir Mascota Ideal")
             }
 
@@ -94,8 +95,8 @@ fun RedNeuralScreen(navController: NavHostController) {
 
             Text(
                 "Precisión del modelo: ${String.format("%.2f", accuracy * 100)}%",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(top = 8.dp)
+                style = MaterialTheme.typography.bodyMedium,color= Color.Black,
+                modifier = Modifier.padding(top = 8.dp, start = 15.dp, end = 15.dp)
             )
         }
     }
