@@ -55,7 +55,9 @@ fun ResultScreen(navController: NavHostController) {
 
 
         Column(
-            modifier = Modifier.fillMaxSize().padding(paddingValues).verticalScroll(scrollState),
+            modifier = Modifier.fillMaxSize()
+            .background(brush = gradientBrush).padding(paddingValues)
+            .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
@@ -64,12 +66,16 @@ fun ResultScreen(navController: NavHostController) {
                     .padding(20.dp),
                 horizontalArrangement = Arrangement.Start
             ) {
-                Button(onClick = { navController.popBackStack() }) {
-                    Text("Volver")
+                Button(onClick = { navController.popBackStack() }
+                    ,modifier = Modifier.padding(bottom = 20.dp,top = 30.dp)
+                    ,elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp)
+                    ,colors = ButtonDefaults.buttonColors(containerColor = Color.White)) {
+                    Text("Volver",color = Color.Black)
                 }
             }
             Spacer(modifier = Modifier.padding(10.dp))
-            Text("Ruta Óptima", style = MaterialTheme.typography.titleLarge, fontStyle = FontStyle.Italic
+            Text("Ruta Óptima", style = MaterialTheme.typography.titleLarge, color = Color.White
+                , fontStyle = FontStyle.Italic
                 , fontWeight = FontWeight.Bold, fontSize = 25.sp)
             Spacer(modifier = Modifier.padding(20.dp))
             Box(
@@ -79,11 +85,11 @@ fun ResultScreen(navController: NavHostController) {
                     .clip(RoundedCornerShape(16.dp))
                     .border(2.dp, Color.Gray, RoundedCornerShape(16.dp))
                     .background(Color.White)
-                    .padding(15.dp)
+
             ) {
                 Canvas(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().padding(20.dp)
                 ) {
                     coords.forEachIndexed { i, (x, y) ->
                         drawCircle(
@@ -119,9 +125,9 @@ fun ResultScreen(navController: NavHostController) {
                 }
             }
             Spacer(modifier = Modifier.padding(5.dp))
-            Text("Ruta: ${mejorRuta.joinToString(" -> ") { (it + 1).toString() }}")
+            Text("Ruta: ${mejorRuta.joinToString(" -> ") { (it + 1).toString() }}", color = Color.Black)
             Spacer(modifier = Modifier.padding(10.dp))
-            Text("Distancia total: ${"%.2f".format(distanciaTotal)} km", modifier = Modifier.padding(bottom = 40.dp))
+            Text("Distancia total: ${"%.2f".format(distanciaTotal)} km", color = Color.Black, modifier = Modifier.padding(bottom = 40.dp))
 
 
         }

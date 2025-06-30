@@ -41,6 +41,7 @@ android {
     aaptOptions {
         noCompress("tflite")
     }
+
 }
 
 dependencies {
@@ -57,8 +58,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose.android)
     implementation(libs.androidx.foundation.android)
     implementation("androidx.compose.material:material:1.5.4")
-    implementation("org.tensorflow:tensorflow-lite:2.14.0")
     implementation("org.tensorflow:tensorflow-lite-support:0.4.3")
+    implementation("org.tensorflow:tensorflow-lite:2.14.0")
+    implementation("org.tensorflow:tensorflow-lite-select-tf-ops:2.14.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
