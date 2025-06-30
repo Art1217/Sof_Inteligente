@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.soft_inteligente_app.ui.theme.screens.ClasificadorScreen
 import com.example.soft_inteligente_app.ui.theme.screens.GraficCIScreen
 import com.example.soft_inteligente_app.ui.theme.screens.GraficNaiveScreen
+import com.example.soft_inteligente_app.ui.theme.screens.GraficPLNScreen
 import com.example.soft_inteligente_app.ui.theme.screens.GraficRNScreen
 import com.example.soft_inteligente_app.ui.theme.screens.InputScreen
 import com.example.soft_inteligente_app.ui.theme.screens.IrisClassifierScreen
@@ -31,5 +32,6 @@ fun AppNavigator() {
         composable("clas_im") {ClasificadorScreen(navController)  }
         composable("grafico_ci") {GraficCIScreen(navController)  }
         composable("natural_leng"){TextClassifierScreen(navController)}
+        composable("grafico_pln"){GraficPLNScreen(navController)}
     }
 }

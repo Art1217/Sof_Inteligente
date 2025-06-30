@@ -195,7 +195,7 @@ fun menu(navController: NavController){
                         .fillMaxWidth()
                     ,horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Button(onClick ={navController.navigate("grafico_ci")},modifier = Modifier
+                    Button(onClick ={navController.navigate("grafico_pln")},modifier = Modifier
                         ,elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp)
                         ,colors = ButtonDefaults.buttonColors(containerColor = Color.White))
                     { Text("Gráficas", color = Color.Black)}

@@ -2,6 +2,7 @@ package com.example.soft_inteligente_app.ui.theme.screens
 
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -22,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.soft_inteligente_app.R
 import com.example.soft_inteligente_app.data.TextClassifier.TextClassifier
 import kotlinx.coroutines.launch
 
@@ -31,6 +34,7 @@ fun TextClassifierScreen(navController: NavHostController) {
     val context = LocalContext.current
     var inputText by remember { mutableStateOf("") }
     var result by remember { mutableStateOf("") }
+    var categoryImage by remember { mutableStateOf<Int?>(null) }
     val classifier = remember { TextClassifier(context) }
 
     Scaffold(
@@ -55,7 +59,7 @@ fun TextClassifierScreen(navController: NavHostController) {
 
             Text("Clasificador de Noticias",color= Color.White,fontSize = 30.sp, textAlign = TextAlign.Center
                 , fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.headlineSmall)
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(35.dp))
 
             OutlinedTextField(
                 value = inputText,
@@ -73,14 +77,22 @@ fun TextClassifierScreen(navController: NavHostController) {
 
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(25.dp))
             val coroutineScope = rememberCoroutineScope()
             Button(onClick = {
                 result = "Clasificando..."
                 coroutineScope.launch {
                     val prediction = classifier.classify(inputText)
                     result = "Categoría: $prediction"
+                    categoryImage = when (prediction) {
+                        "World" -> R.drawable.world
+                        "Sports" -> R.drawable.sport
+                        "Business" -> R.drawable.business
+                        "Sci/Tech" -> R.drawable.tec
+                        else -> null
+                    }
                 }
+
             } ,elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp)
                 ,colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4393C5))) {
                 Text("Clasificar", color = Color.White)
@@ -89,6 +101,17 @@ fun TextClassifierScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text("$result", style = MaterialTheme.typography.bodyLarge)
+
+            categoryImage?.let { resId ->
+                Spacer(modifier = Modifier.height(12.dp))
+                Image(
+                    painter = painterResource(id = resId),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(150.dp)
+                        .padding(8.dp)
+                )
+            }
         }
     }
 }
